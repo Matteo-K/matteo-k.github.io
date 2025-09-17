@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "statut": "actif",
+    "project": 8,
+    "technologie": 1,
+    "pourcentage_using": 78.26,
+    "createdAt": "2025-08-03T17:54:34+00:00",
+    "updatedAt": "2025-08-03T17:54:34+00:00"
+  }
+]
