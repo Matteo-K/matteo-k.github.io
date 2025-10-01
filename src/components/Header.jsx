@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
   const [time, setTime] = useState(new Date());
@@ -13,22 +14,48 @@ export default function Header() {
   return (
     <>
       <header>
+        {/* Navigation */}
+        
         <nav>
-          <a href="#">Portfolio</a>
-          <a href="#">Contact</a>
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) =>
+              `transition-colors duration-200 hover:text-ps-lightGray ${isActive ? "text-ps-lightGray" : "text-ps-white"}`
+            }
+          >
+            Portfolio
+          </NavLink>
+          <NavLink
+            to="/contact"
+            className={({ isActive }) =>
+              `transition-colors duration-200 hover:text-ps-lightGray ${isActive ? "text-ps-lightGray" : "text-ps-white"}`
+            }
+          >
+            Contact
+          </NavLink>
         </nav>
 
+        {/* Profil + Heure */}
         <div>
-          <a href="">
-            <img src="" alt="paramètres" title="paramètres" />
-          </a>
           <figure>
-            <img src="" alt="Icon de Mattéo Kervadec" title="Icon de Mattéo Kervadec"/>
-            <figcaption>Mattéo Kervadec</figcaption>
+            <img
+              src="/image/matteo_kervadec.png"
+              alt="Icon de Mattéo Kervadec"
+              title="Icon de Mattéo Kervadec"
+            />
+            <figcaption>
+              Mattéo Kervadec
+            </figcaption>
           </figure>
-          <time datetime={time.getHours() + ":" + time.getMinutes()}>{time.getHours()}:{time.getMinutes()}</time>
+          <time
+            dateTime={`${time.getHours().toString().padStart(2, "0")}:${time.getMinutes().toString().padStart(2, "0")}`}
+          >
+            {time.getHours().toString().padStart(2, "0")}:{time.getMinutes().toString().padStart(2, "0")}
+          </time>
         </div>
       </header>
     </>
+
   );
 }

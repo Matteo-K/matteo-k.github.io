@@ -19,6 +19,7 @@ Trophy.fields = {
   createdAt: attr(),
   updatedAt: attr(),
   trophyRoad: fk('TrophyRoad'),
+  priority: attr()
 };
 
 export default Trophy;

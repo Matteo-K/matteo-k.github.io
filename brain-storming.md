@@ -41,3 +41,6 @@ Importance [5-0]
   - Stocker dans le local storage
   - Taille du block = (Taille1blc + padding) * NBLigne + (NBLigne - 1) * margin
   - Display : grid
+
+
+  - Secret: Golden pass comme dans tunic

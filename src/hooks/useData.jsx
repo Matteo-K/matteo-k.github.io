@@ -1,10 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import dataManager from '../orm/dataManager';
 
 export function useData() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [session, setSession] = useState(null);
+
+  const getProjects = useCallback(
+    ({ where = {}, order = {}, limit = -1 } = {}) =>
+      dataManager.getProjects({ where, order, limit }),
+    []
+  );
   
   useEffect(() => {
     const loadData = async () => {
@@ -19,7 +25,7 @@ export function useData() {
         setIsLoading(false);
       }
     };
-      
+
     loadData();
   }, []);
   
@@ -27,8 +33,11 @@ export function useData() {
     isLoading, 
     error, 
     session,
+    getProjects,
     // Méthodes helper
     getAllProjects: () => dataManager.getAllProjects(),
+    getAllProjectsSortedByPriority: (descending) => dataManager.getAllProjectsSortedByPriority(descending),
+    getLimitedProjects: (limit) => dataManager.getLimitedProjects(limit),
     getProjectById: (id) => dataManager.getProjectById(id),
     getProjectsByStatus: (status) => dataManager.getProjectsByStatus(status),
     getAllCollaborators: () => dataManager.getAllCollaborators(),

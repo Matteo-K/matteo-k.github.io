@@ -1,12 +1,39 @@
-import Header from "./components/Header";
-import Main from "./components/Main";
+import { createHashRouter, RouterProvider } from "react-router-dom";
+import { Home, About, Contact, Projects, Project, Trophies, ProjectTrophy } from "./pages";
 
-export default function App() {
+const router = createHashRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/about",
+    element: <About />,
+  },
+  {
+    path: "/contact",
+    element: <Contact />,
+  },
+  {
+    path: "/projects",
+    element: <Projects />,
+  },
+  {
+    path: "/project/:title",
+    element: <Project />,
+  },
+  {
+    path: "trophies",
+    element: <Trophies />,
+  },
+  {
+    path: "/project/trophy/:title",
+    element: <ProjectTrophy />,
+  },
+]);
 
-  return (
-    <>
-      <Header />
-      <Main />
-    </>
-  );
+function App() {
+  return <RouterProvider router={router} />;
 }
+
+export default App;

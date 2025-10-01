@@ -1,13 +1,1 @@
-[
-  {
-    "id": 2,
-    "statut": "actif",
-    "name": "E-declic",
-    "link_web": "https://www.e-declic.com",
-    "description": "<div>Agence web</div>",
-    "projects": [8],
-    "logoName": "688f964b7dcd0_logo_e-declic.png",
-    "createdAt": "2025-08-03T16:59:13+00:00",
-    "updatedAt": "2025-08-03T17:03:07+00:00"
-  }
-]
+[{"id":2,"statut":"actif","name":"E-declic","link_web":"https:\/\/www.e-declic.com","description":"<div>E-declic est une <strong>agence web fond\u00e9e en 2004 <\/strong>et<strong> bas\u00e9e en Bretagne \u00e0 Auray,<\/strong> sp\u00e9cialis\u00e9e dans la cr\u00e9ation de sites internet, d\u2019applications web, le webmarketing et le r\u00e9f\u00e9rencement.<\/div>","projects":[8],"logoName":"688f964b7dcd0_logo_e-declic.png","createdAt":"2025-08-03T16:59:13+00:00","updatedAt":"2025-09-29T15:04:25+00:00"}]

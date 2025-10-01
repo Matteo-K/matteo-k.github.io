@@ -11,6 +11,7 @@ TrophyRoad.modelName = 'TrophyRoad';
 TrophyRoad.fields = {
   id: attr(),
   statut: attr(),
+  type: attr(),
   name: attr(),
   project: fk('Project'),
   trophies: many('Trophy'),

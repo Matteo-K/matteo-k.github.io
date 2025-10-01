@@ -70,7 +70,7 @@ class DataManager {
     
     for (const entityName of entityFiles) {
       try {
-        const response = await fetch(`./entities/${entityName}.json`);
+        const response = await fetch(`/entities/${entityName}.json`);
         if (response.ok) {
           console.log(response);
           const data = await response.json();
@@ -119,20 +119,111 @@ class DataManager {
   capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   }
-  
+
+  /**
+   * Hydratation des entités
+   */
+  hydrateProject(project) {
+    if (!project) return null;
+
+    return {
+      ...project.ref,
+      projectTechnologies: project.projectTechnologies != null
+        ? project.projectTechnologies.toModelArray().map(pt => ({
+          id: pt.id,
+          statut: pt.statut,
+          pourcentage_using: pt.pourcentage_using,
+          technologie: pt.technologie ? pt.technologie.ref : null,
+          createdAt: pt.createdAt,
+          updatedAt: pt.updatedAt,
+        }))
+        : [],
+      society: project.society ? project.society.ref : null,
+      school: project.school ? project.school.ref : null,
+      collaborators: project.collaborators.toRefArray(),
+
+      trophyRoads: project.trophyRoads != null
+        ? project.trophyRoads.toModelArray().map(tph => ({
+          id: tph.id,
+          statut: tph.statut,
+          type: tph.type,
+          name: tph.name,
+          trophies: tph.trophies.toRefArray(),
+          createdAt: tph.createdAt,
+          updatedAt: tph.updatedAt,
+        }))
+        : [],
+    };
+  }
+
   /**
    * Méthodes helper pour des requêtes courantes
    */
   getAllProjects() {
-    return this.getSession().Project.all().toModelArray();
+    return this.getSession().Project.all().toModelArray().map(p => this.hydrateProject(p));
   }
-  
+
   getProjectById(id) {
-    return this.getSession().Project.withId(id);
+    const project = this.getSession().Project.withId(id);
+    return project ? this.hydrateProject(project) : null;
   }
-  
+
+  getProjects({ where = {}, order = {}, limit = -1 } = {}) {
+    let query = this.getSession().Project.all();
+
+    // Filtrage
+    if (where && Object.keys(where).length > 0) {
+      query = query.filter(project => {
+        return Object.entries(where).every(([key, value]) => project[key].toUpperCase() === value.toUpperCase());
+      });
+    }
+
+    // Hydratation des projets
+    let projects = query.toModelArray().map(p => this.hydrateProject(p));
+
+    // Tri
+    if (order && Object.keys(order).length > 0) {
+      projects.sort((a, b) => {
+        for (const [key, direction] of Object.entries(order)) {
+          if (a[key] < b[key]) return -1 * direction;
+          if (a[key] > b[key]) return 1 * direction;
+        }
+        return 0;
+      });
+    }
+
+    // Limite
+    if (limit > -1) {
+      projects = projects.slice(0, limit);
+    }
+
+    return projects;
+  }
+
+
   getProjectsByStatus(status) {
-    return this.getSession().Project.filter({ statut: status }).toModelArray();
+    return this.getSession().Project.filter({ statut: status })
+      .toModelArray()
+      .map(p => this.hydrateProject(p));
+  }
+
+  getAllProjectsSortedByPriority(descending = false) {
+    const projects = this.getSession().Project.all().toModelArray();
+    const sortedProjects = projects.sort((a, b) => {
+      if (descending) {
+        return b.priority - a.priority;
+      } else {
+        return a.priority - b.priority;
+      }
+    });
+    return sortedProjects.map(p => this.hydrateProject(p));
+  }
+
+  // Récupérer les N premiers projets
+  getLimitedProjects(limit) {
+    const projects = this.getSession().Project.all().toModelArray();
+    const limitedProjects = projects.slice(0, limit);
+    return limitedProjects.map(p => this.hydrateProject(p));
   }
   
   getAllCollaborators() {
@@ -157,4 +248,5 @@ class DataManager {
 }
 
 const dataManager = new DataManager();
+
 export default dataManager;
