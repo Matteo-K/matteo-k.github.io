@@ -174,7 +174,30 @@ class DataManager {
     // Filtrage
     if (where && Object.keys(where).length > 0) {
       query = query.filter(project => {
-        return Object.entries(where).every(([key, value]) => project[key].toUpperCase() === value.toUpperCase());
+        return Object.entries(where).every(([key, condition]) => {
+          const projectValue = String(project[key] || "").toUpperCase();
+
+          if (typeof condition === "string") {
+            return projectValue === condition.toUpperCase();
+          }
+
+          if (typeof condition === "object") {
+            if (condition.equals) {
+              return projectValue === condition.equals.toUpperCase();
+            }
+            if (condition.contains) {
+              return projectValue.includes(condition.contains.toUpperCase());
+            }
+            if (condition.startsWith) {
+              return projectValue.startsWith(condition.startsWith.toUpperCase());
+            }
+            if (condition.endsWith) {
+              return projectValue.endsWith(condition.endsWith.toUpperCase());
+            }
+          }
+
+          return true;
+        });
       });
     }
 

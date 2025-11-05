@@ -1,6 +1,11 @@
 import { useData } from '../hooks/useData';
 import { DataStatut } from '../enums/DataStatut';
-import { NavLink } from "react-router-dom";
+
+import { Navigation, Pagination, A11y } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 export default function NavProjects(props) {
   const { isLoading, error, getProjects } = useData();
@@ -12,28 +17,43 @@ export default function NavProjects(props) {
     order: { priority: 1}
   });
 
-  const handleClick = (project) => {
+  const setSlide = (project) => {
     props.setProject(project);
   };
   return (
     <nav>
-      {projects.map((project) => (
-        <div
-          key={project.id}
-          className={props.project && props.project.id === project.id ? "actif" : ""}
-          onClick={() => handleClick(project)}
-        >
-          <div>
-            <img src={"/image/uploads/images/project/card/" + project.illustrationCardName} alt={project.title} title={project.title}/>
-          </div>
-        </div>
-      ))}
-      <NavLink
-        to="/projects"
+      <Swiper
+        modules={[Navigation, Pagination, A11y]}
+        spaceBetween={50}
+        slidesPerView={3}
+        navigation
+        pagination={{ clickable: true }}
+        onSlideChange={(swiper) => setSlide(projects[swiper.activeIndex])}
       >
-        CARD PROJECTS
-      </NavLink>
-
+        <SwiperSlide key={0}>
+          {({ isActive }) => (
+            <div>
+              MENU
+            </div>
+          )}
+        </SwiperSlide>
+        {projects.map((project) => (
+          <SwiperSlide key={project.id} data-project-id={project.id}>
+            {({ isActive }) => (
+              <div className={isActive ? 'active' : ''}>
+                <img src={"/image/uploads/images/project/card/" + project.illustrationCardName} alt={project.title} title={project.title}/>
+              </div>
+            )}
+          </SwiperSlide>
+        ))}
+        <SwiperSlide key={"all"}>
+          {({ isActive }) => (
+            <div className={isActive ? 'active' : ''}>
+              ALL
+            </div>
+          )}
+        </SwiperSlide>
+      </Swiper>
     </nav>
   );
 }

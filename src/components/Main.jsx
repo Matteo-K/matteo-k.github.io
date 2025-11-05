@@ -1,31 +1,21 @@
-import { useState, useEffect } from "react";
-import { useData } from '../hooks/useData';
-import { DataStatut } from '../enums/DataStatut';
+import { useState } from "react";
 import NavProjects from "./NavProjects";
 import Details from "./Project/Details";
+import Projects from "./Projets";
+import Menu from "./Menu"
 
 export default function Main() {
-  const { isLoading, getProjects } = useData();
   const [project, setProject] = useState(null);
-
-  useEffect(() => {
-    if (!isLoading) {
-      const loadedProjects = getProjects({
-          where: { statut: DataStatut.ACTIF },
-          order: { priority: 1},
-          limit: 1
-        });
-      if (loadedProjects.length > 0) {
-        setProject(loadedProjects[0]);
-      }
-    }
-  }, [isLoading, getProjects]);
 
   return (
     <>
       <main>
-        {project && <NavProjects project={project} setProject={setProject} />}
-        {project && <Details project={project} />}
+        <NavProjects project={project} setProject={setProject} />
+        {project && typeof project === 'object' && <Details project={project} />}
+
+        {project && project === "all" && <Projects />}
+
+        {!project && <Menu />}
       </main>
     </>
   );
