@@ -1,5 +1,5 @@
 import { createHashRouter, RouterProvider } from "react-router-dom";
-import { Home, About, Contact, Project, Trophies, ProjectTrophy } from "./pages";
+import { Home, About, Contact, Project, Trophies, ProjectTrophy, Login, Logout } from "./pages";
 
 const router = createHashRouter([
   {
@@ -19,12 +19,20 @@ const router = createHashRouter([
     element: <Project />,
   },
   {
-    path: "trophies",
+    path: "/trophies",
     element: <Trophies />,
   },
   {
     path: "/project/trophy/:title",
     element: <ProjectTrophy />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/logout",
+    element: <Logout />,
   },
 ]);
 

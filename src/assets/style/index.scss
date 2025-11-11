@@ -5,6 +5,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: "Monserrat";
   src: url("/src/assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf") format("truetype");
@@ -12,6 +13,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: "Bebas Neue";
   src: url("/src/assets/fonts/Bebas_Neue/BebasNeue-Regular.ttf") format("truetype");
@@ -19,6 +21,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 body {
   --color-white: #fff;
   --color-black: #000;
@@ -51,6 +54,7 @@ body {
   --color-error: #ff3333;
   --color-gradient-start: #0070cc;
   --color-gradient-end: #003087;
+
   color: var(--color-text-primary);
   background-color: var(--color-background-primary);
 }
@@ -60,9 +64,10 @@ body {
   color: var(--color-text-primary);
   text-decoration: none;
   font-size: 1.5rem;
-}
-.nav-link.active {
-  font-weight: bold;
+
+  &.active {
+    font-weight: bold;
+  }
 }
 
 /* ## Header */
@@ -72,20 +77,22 @@ header {
   align-items: center;
   padding-inline: 2vw;
   padding-block: 10px;
-}
-header > * {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding: 10px;
-}
-header > *:last-child {
-  gap: 3vw;
-}
-header time {
-  font-weight: bold;
-  font-size: 1.5rem;
+
+  > *  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
+    &:last-child {
+      gap: 3vw;
+    }
+  }
+
+  time {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
 }
 
 /* Container principal */
@@ -99,7 +106,6 @@ header time {
 
 .swiper {
   width: 100%;
-  height: -moz-fit-content;
   height: fit-content;
   padding: 100px;
 }
@@ -110,6 +116,9 @@ header time {
   margin-left: 15%;
 }
 
+$size: 106;
+$size-active: 106 * 1.5;
+$animation-time: 0.4s;
 .swiper-slide {
   position: relative;
   display: flex;
@@ -117,69 +126,75 @@ header time {
   align-items: center;
   justify-content: center;
   gap: 24px;
-}
-.swiper-slide.swiper-slide-active {
-  width: 159px !important;
-  height: 159px;
+
+  &.swiper-slide-active {
+    width: #{$size-active}px !important;
+    height: #{$size-active}px;
+  }
 }
 
 .card-project {
   position: relative;
-  width: 106px;
-  height: 106px;
+  width: #{$size}px;
+  height: #{$size}px;
   border-radius: 16px;
   background: var(--color-background-card);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.4s cubic-bezier(0.4, 0.2, 0.2, 1);
-}
-.card-project:hover {
-  cursor: pointer;
-}
-.card-project img:not(.icon) {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
-  border-radius: inherit;
-}
-.card-project .icon {
-  width: 50%;
-  height: 50%;
-}
-.card-project.active {
-  width: 159px;
-  height: 159px;
-}
-.card-project.active:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  z-index: -1;
-  border-radius: inherit;
-  background: linear-gradient(to right, var(--color-border-100), var(--color-border-0));
-  margin: -5px;
-}
-.card-project.active + div {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  padding-left: 20px;
-  transform: translateX(100%);
-  animation: display 0.4s linear;
+  transition: all #{$animation-time} cubic-bezier(0.4, 0.2, 0.2, 1);
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  img:not(.icon) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+  }
+
+  .icon {
+    width: 50%;
+    height: 50%;
+  }
+
+  &.active {
+    width: #{$size-active}px;
+    height: #{$size-active}px;
+  }
+
+  &.active {
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0; right: 0; left: 0; bottom: 0;
+      z-index: -1;
+      border-radius: inherit;
+      background: linear-gradient(
+        to right, var(--color-border-100), var(--color-border-0)
+      );
+      margin: -5px;
+    }
+
+    + div {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      padding-left: 20px;
+      transform: translateX(100%);
+      animation: display #{$animation-time} linear;
+    }
+  }
 }
 
 @keyframes display {
   from {
     opacity: 0;
     transform: translate(100%, 50%);
-  }
-  to {
+  } to {
     opacity: 1;
     transform: translate(100%, 0);
   }
-}/*# sourceMappingURL=index.css.map */
+}

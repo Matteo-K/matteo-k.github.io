@@ -1,8 +1,21 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { BurgerMenu } from "./_partials";
+import { isDragActive } from "framer-motion";
 
 export default function Header() {
   const [time, setTime] = useState(new Date());
+
+  const nav_about = [
+    {"title": "profil", "lien": "/about"},
+    {"title": "trophées", "lien": "/trophies"},
+    {"title": "Déconnexion", "lien": "/logout"},
+  ]
+  
+  const nav_home = [
+    {"title": "Portfolio", "lien": "/"},
+    {"title": "Contact", "lien": "/contact"},
+  ]
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -15,39 +28,32 @@ export default function Header() {
     <>
       <header>
         {/* Navigation */}
-        
         <nav>
-          <NavLink
-            to="/"
-            end
-            className={({ isActive }) =>
-              `transition-colors duration-200 hover:text-ps-lightGray ${isActive ? "text-ps-lightGray" : "text-ps-white"}`
-            }
-          >
-            Portfolio
-          </NavLink>
-          <NavLink
-            to="/contact"
-            className={({ isActive }) =>
-              `transition-colors duration-200 hover:text-ps-lightGray ${isActive ? "text-ps-lightGray" : "text-ps-white"}`
-            }
-          >
-            Contact
-          </NavLink>
+          {nav_home.map((element) => {
+            return (
+              <NavLink
+                to={element.lien}
+                end
+                className={({isActive}) => (
+                  "nav-link " + (isActive ? "active" : "")
+                )}
+              >
+                {element.title}
+              </NavLink>
+            )
+          })}
         </nav>
 
         {/* Profil + Heure */}
         <div>
-          <figure>
+          <BurgerMenu type="profile" data={nav_about} title="Mattéo Kervadec">
             <img
+              className="profil-icon"
               src="/image/matteo_kervadec.png"
               alt="Icon de Mattéo Kervadec"
               title="Icon de Mattéo Kervadec"
             />
-            <figcaption>
-              Mattéo Kervadec
-            </figcaption>
-          </figure>
+          </BurgerMenu>
           <time
             dateTime={`${time.getHours().toString().padStart(2, "0")}:${time.getMinutes().toString().padStart(2, "0")}`}
           >

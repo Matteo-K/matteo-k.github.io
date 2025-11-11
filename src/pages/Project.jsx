@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useData } from "../hooks/useData";
 import { DataStatut } from "../enums/DataStatut";
 import Details from "../components/Project/Details";
+import { Page } from "../components/_partials";
 
 export default function Project() {
   const { title } = useParams();
@@ -18,11 +19,11 @@ export default function Project() {
   if (!project) return <div>Projet introuvable</div>;
 
   return (
-    <>
+    <Page>
       <div>
         {project.title}
       </div>
       <Details project={project} />
-    </>
+    </Page>
   );
 }
