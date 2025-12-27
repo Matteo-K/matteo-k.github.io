@@ -78,7 +78,7 @@ body {
   position: relative;
   border-radius: 10px;
 }
-.border-hover:hover:before, .border-hover:focus:before {
+.border-hover:hover:before, .border-hover:focus:before, .border-hover.active {
   content: "";
   position: absolute;
   top: 0;
@@ -639,4 +639,30 @@ header .nav-link.active {
 }
 .detailsProject .description {
   border-radius: 10px;
+}
+
+#login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+  cursor: pointer;
+}
+#login time {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+#login button {
+  border: none;
+  color: var(--color-text-primary);
+  background-color: var(--color-background-primary);
+  width: 100%;
+  height: 100%;
+}
+#login button > img:first-child {
+  border-radius: 50%;
+  border: var(--color-border-100) 5px solid;
 }/*# sourceMappingURL=index.css.map */
