@@ -34,6 +34,7 @@ body {
   --color-ps-dark-blue: #003087;
   --color-background-primary: #1f1f1f;
   --color-background-secondary: #2d2d2d;
+  --color-background-third: #3b3b3b;
   --color-background-card: #1a1a1a;
   --color-text-primary: #ffffff;
   --color-text-secondary: #b3b3b3;
@@ -63,7 +64,7 @@ body {
   position: relative;
   border-radius: 10px;
 }
-.border-hover:hover:before {
+.border-hover:hover:before, .border-hover:focus:before {
   content: "";
   position: absolute;
   top: 0;
@@ -74,6 +75,34 @@ body {
   border-radius: inherit;
   background: linear-gradient(to right, var(--color-border-100), var(--color-border-0));
   margin: -5px;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+}
+.checkbox input {
+  display: none;
+  visibility: collapse;
+}
+.checkbox .checkbox-box {
+  position: relative;
+  display: inherit;
+  width: 20px;
+  aspect-ratio: 1/1;
+  background-color: var(--color-white);
+}
+.checkbox input:checked + .checkbox-box::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 65%;
+  aspect-ratio: 1/1;
+  background-color: var(--color-background-third);
 }
 
 /* ## Header */
@@ -212,6 +241,8 @@ header .nav-link.active {
   padding-left: 20px;
   transform: translateX(100%);
   animation: display 0.4s linear;
+  text-wrap: nowrap;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
@@ -286,14 +317,31 @@ header .nav-link.active {
 }
 
 #projets {
+  margin: 20px 3vw;
+}
+#projets > div {
+  display: flex;
+  justify-content: space-between;
+  margin-block: 20px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+#projets main {
+  display: flex;
+  gap: 20px;
+}
+#projets main > div {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-column-gap: 30px;
   grid-row-gap: 30px;
-  margin: 20px 10vw;
+}
+#projets main aside {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-/* Projets */
 /* About me */
 #aboutme header figure {
   justify-content: start;
@@ -394,7 +442,7 @@ header .nav-link.active {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: white;
+  color: var(--color-white);
   text-decoration: none;
 }
 #aboutme-project li a > figure, #aboutme-project li a > div {
@@ -442,4 +490,105 @@ header .nav-link.active {
   width: 150px;
   aspect-ratio: 1/1;
   border-radius: 50%;
+}
+
+/* L'élément déclencheur devient un "anchor" */
+.popup {
+  position: relative;
+  display: inline-block;
+}
+.popup button {
+  anchor-name: --popup-anchor;
+  position: relative;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+  padding: 15px;
+  aspect-ratio: 1/1;
+  background-color: var(--color-background-secondary);
+  border-radius: 50%;
+}
+.popup button .forward {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -10px;
+  right: -20%;
+  width: 30px;
+  aspect-ratio: 1/1;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--color-text-primary);
+  background-color: var(--color-background-third);
+  border-radius: 50%;
+}
+.popup > div {
+  position: absolute;
+  position-anchor: --popup-anchor;
+  top: -5px;
+  left: 110%;
+  margin-left: 8px;
+  min-width: 200px;
+  background-color: var(--color-background-secondary);
+  border-radius: 6px;
+  padding: 1rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 100;
+}
+.popup .open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(5px);
+}
+
+/* Spécifique */
+.popup .search {
+  padding: 10px;
+  color: var(--color-text-primary);
+  background-color: var(--color-background-third);
+  border: none;
+  border-radius: 5px;
+}
+.popup .search::-moz-placeholder {
+  color: var(--color-text-secondary);
+}
+.popup .search::placeholder {
+  color: var(--color-text-secondary);
+}
+.popup .sort, .popup .filter {
+  padding-block: 15px;
+}
+.popup .sort {
+  border-bottom: var(--color-border-100) 1px solid;
+}
+.popup .sort select {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--color-background-secondary);
+  color: white;
+  border: 1px solid var(--color-white);
+  border-radius: 5px;
+  cursor: pointer;
+}
+.popup .filter summary {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+}
+.popup .filter summary:hover {
+  background-color: var(--color-background-third);
+}
+.popup .filter div {
+  display: grid;
+  row-gap: 10px;
+  padding: 10px;
+}
+.popup .filter div label {
+  text-wrap: nowrap;
 }/*# sourceMappingURL=index.css.map */

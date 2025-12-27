@@ -11,7 +11,6 @@ export default function Project() {
   if (isLoading) return <div>🔄 Chargement...</div>;
   if (error) return <div>❌ Erreur: {error}</div>;
 
-  console.log(title);
   const project = getProjects({
     where: { title: title, statut: DataStatut.ACTIF },
   })[0];

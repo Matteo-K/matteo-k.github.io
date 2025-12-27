@@ -33,7 +33,6 @@ export default function MostProjectCollaborator(props) {
                     alt={collab.collaborator.name + " " + collab.collaborator.surname} 
                     title={collab.collaborator.name + " " + collab.collaborator.surname}
                   />
-                  {console.log(collab)}
                   <figcaption>
                     <h4>{collab.collaborator.name}</h4>
                     <div>Nombre de projets : {collab.projectCount}</div>

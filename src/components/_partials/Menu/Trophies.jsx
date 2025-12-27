@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function Trophies(props) {
 
-const { isLoadingTrophy, countTrophyByType } = useData();
+const { isLoadingTrophy, error, countTrophyByType } = useData();
   // Trophée
   let trophies = React.useMemo(() => ({
     "platinium": {
@@ -35,7 +35,7 @@ const { isLoadingTrophy, countTrophyByType } = useData();
 
   const enrichedTrophies = React.useMemo(() => {
     // Si les données sont en cours de chargement, retourner les trophées par défaut
-    if (isLoadingTrophy) {
+    if (isLoadingTrophy || error) {
       return trophies;
     }
     
@@ -54,7 +54,7 @@ const { isLoadingTrophy, countTrophyByType } = useData();
       console.error('Erreur lors du comptage des trophées:', error);
       return trophies;
     }
-  }, [isLoadingTrophy, trophies, countTrophyByType]);
+  }, [isLoadingTrophy, error, trophies, countTrophyByType]);
 
   return (
     <section className={props.className + " block trophies"}>

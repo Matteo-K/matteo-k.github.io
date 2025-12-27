@@ -35,6 +35,7 @@ body {
   --color-ps-dark-blue: #003087;
   --color-background-primary: #1f1f1f;
   --color-background-secondary: #2d2d2d;
+  --color-background-third: #3b3b3b;
   --color-background-card: #1a1a1a;
   --color-text-primary: #ffffff;
   --color-text-secondary: #b3b3b3;
@@ -66,7 +67,7 @@ body {
   position: relative;
   border-radius: 10px;
 
-  &:hover:before {
+  &:hover:before, &:focus:before {
     content: "";
     position: absolute;
     top: 0; right: 0; left: 0; bottom: 0;
@@ -76,6 +77,37 @@ body {
       to right, var(--color-border-100), var(--color-border-0)
     );
     margin: -5px;
+  }
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+
+  input {
+    display: none;
+    visibility: collapse;
+  }
+
+  .checkbox-box {
+    position: relative;
+    display: inherit;
+    width: 20px;
+    aspect-ratio: 1/1;
+    background-color: var(--color-white);
+  }
+
+  input:checked + .checkbox-box::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 65%;
+    aspect-ratio: 1/1;
+    background-color: var(--color-background-third);
   }
 }
 
@@ -229,6 +261,8 @@ $animation-time: 0.4s;
       padding-left: 20px;
       transform: translateX(100%);
       animation: display #{$animation-time} linear;
+      text-wrap: nowrap;
+      font-size: 1.5rem;
       font-weight: bold;
     }
   }
@@ -317,16 +351,33 @@ $animation-time: 0.4s;
 }
 
 #projets {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-column-gap: 30px;
-  grid-row-gap: 30px;
-  margin: 20px 10vw;
-}
+  margin: 20px 3vw;
 
-/* Projets */
-#projects {
+  > div {
+    display: flex;
+    justify-content: space-between;
+    margin-block: 20px;
+    font-weight: bold;
+    font-size: 1rem;
+  }
 
+  main {
+    display: flex;
+    gap: 20px;
+
+    > div {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-column-gap: 30px;
+      grid-row-gap: 30px;
+    }
+
+    aside {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
 }
 
 /* About me */
@@ -454,7 +505,7 @@ $animation-time: 0.4s;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: white;
+    color: var(--color-white);
     text-decoration: none;
 
     > figure, > div {
@@ -510,5 +561,124 @@ $animation-time: 0.4s;
     width: 150px;
     aspect-ratio: 1/1;
     border-radius: 50%;
+  }
+}
+
+
+
+/* L'élément déclencheur devient un "anchor" */
+.popup {
+  position: relative;
+  display: inline-block;
+
+  button {
+    anchor-name: --popup-anchor;
+    position: relative;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: inline-block;
+    width: 100%;
+    padding: 15px;
+    aspect-ratio: 1/1;
+    background-color: var(--color-background-secondary);
+    border-radius: 50%;
+
+    .forward {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: -10px;
+      right: -20%;
+      width: 30px;
+      aspect-ratio: 1/1;
+      font-size: 1rem;
+      font-weight: bold;
+      color: var(--color-text-primary);
+      background-color: var(--color-background-third);
+      border-radius: 50%;
+    }
+  }
+
+  > div {
+    position: absolute;
+    position-anchor: --popup-anchor;
+
+    top: -5px;
+    left: 110%;
+    margin-left: 8px;
+
+    min-width: 200px;
+    background-color: var(--color-background-secondary);
+    border-radius: 6px;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 100;
+  }
+
+  .open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(5px);
+  }
+}
+
+/* Spécifique */
+.popup {
+  .search {
+    padding: 10px;
+    color: var(--color-text-primary);
+    background-color: var(--color-background-third);
+    border: none;
+    border-radius: 5px;
+
+    &::placeholder {
+      color: var(--color-text-secondary);
+    }
+  }
+
+  .sort, .filter {
+    padding-block: 15px;
+  }
+
+  .sort {
+    border-bottom: var(--color-border-100) 1px solid;
+
+    select {
+      width: 100%;
+      padding: 10px;
+      background-color: var(--color-background-secondary);
+      color: white;
+      border: 1px solid var(--color-white);
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+
+  .filter {
+    summary {
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 10px;
+
+      &:hover {
+        background-color: var(--color-background-third);
+      }
+    }
+
+    div {
+      display: grid;
+      row-gap: 10px;
+      padding: 10px;
+
+      label {
+        text-wrap: nowrap;
+      }
+    }
   }
 }

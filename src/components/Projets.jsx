@@ -1,74 +1,87 @@
 import { useSearchParams, NavLink } from "react-router-dom";
-import { DataStatut } from '../enums/DataStatut';
-import { useData } from '../hooks/useData';
+import { DataStatut } from "../enums/DataStatut";
+import { useData } from "../hooks/useData";
+import SortFilter from "./Project/SortFilter";
 
 export default function Projects() {
-  const [ searchParams, setSearchParams ] = useSearchParams();
-
-  const filters = {
-    search: searchParams.get('search') || '',
-    sort: searchParams.get('sort') || 'priority',
-    order: searchParams.get('order') || 'asc',
-  }
-
+  const [searchParams] = useSearchParams();
   const { isLoading, error, getProjects } = useData();
+
   if (isLoading) return <div>🔄 Chargement...</div>;
   if (error) return <div>❌ Erreur: {error}</div>;
 
-  const projects = getProjects({
-    where: { 
+  const SORT_OPTIONS = [
+    { label: "Priorité croissant", value: "priority:asc" },
+    { label: "Priorité décroissant", value: "priority:desc" },
+    { label: "Nom (A-Z)", value: "title:asc" },
+    { label: "Nom (Z-A)", value: "title:desc" },
+    { label: "Date récente", value: "date:desc" },
+    { label: "Date ancienne", value: "date:asc" },
+  ];
+
+  /* -----------------------------
+     Récupération des filtres
+  ------------------------------ */
+  const search = searchParams.get("search") || "";
+  const sortParam = searchParams.get("sort") || "priority:asc";
+  const selectedTags = searchParams.get("tags")?.split(",").filter(Boolean) || [];
+
+  const [sortField, sortOrder] = sortParam.split(":");
+
+  /* -----------------------------
+     Récupération des projets
+  ------------------------------ */
+  let projects = getProjects({
+    where: {
       statut: DataStatut.ACTIF,
-      ...(filters.search ? { title: { contains: filters.search }} : {})
-     },
-    order: { [filters.sort]: filters.order === "asc" ? 1 : -1 }
+      ...(search ? { title: { contains: search } } : {}),
+    },
+    order: { [sortField]: sortOrder === "asc" ? 1 : -1 },
   });
 
-  const updateFilters = (newFilters) => {
-    const merge = { ...filters, ...newFilters };
-    setSearchParams(merge);
+  /* -----------------------------
+     Filtrage multi-tags
+     Vérifie que le projet contient tous les tags sélectionnés
+  ------------------------------ */
+  if (selectedTags.length > 0) {
+    projects = projects.filter((project) =>
+      selectedTags.every((tagLabel) =>
+        project.tags.some((t) => t.label === tagLabel)
+      )
+    );
   }
 
+  const currentSort =
+    SORT_OPTIONS.find(option => option.value === sortParam) 
+    || SORT_OPTIONS[0];
+
   return (
-    <>
-      <aside>
-        <select
-          value={filters.sort}
-          onChange={(e) => updateFilters({ sort: e.target.value })}
-          className="border p-2 rounded"
-        >
-          <option value="priority">Priorité</option>
-          <option value="title">Nom</option>
-          <option value="date">Date</option>
-        </select>
-
-        <select
-          value={filters.order}
-          onChange={(e) => updateFilters({ order: e.target.value })}
-          className="border p-2 rounded"
-        >
-          <option value="asc">Asc</option>
-          <option value="desc">Desc</option>
-        </select>
-
-        <input
-          type="text"
-          placeholder="🔍 Rechercher..."
-          value={filters.search}
-          onChange={(e) => updateFilters({ search: e.target.value })}
-          className="border p-2 rounded flex-1"
-        />
-      </aside>
-      <main id="projets">
-        {projects.map((project) => (
-          <NavLink
-            to={"/project/" + project.title}
-          >
-            <div className="card-project">
-              <img src={"/image/uploads/images/project/card/" + project.illustrationCardName} alt={project.title} title={project.title}/>
-            </div>
-          </NavLink>
-        ))}
+    <div id="projets">
+      {/* Liste des projets */}
+      <div>
+        <div>Nombre de projets : {projects.length}</div>
+        <div>Trier par : {currentSort.label}</div>
+      </div>
+      <main>
+        {/* Composant de filtres */}
+        <SortFilter options={SORT_OPTIONS}/>
+        <div>
+          {projects.map((project) => (
+            <NavLink
+              key={project.id}
+              to={`/project/${project.title}`}
+            >
+              <div className="card-project border-hover">
+                <img
+                  src={`/image/uploads/images/project/card/${project.illustrationCardName}`}
+                  alt={project.title}
+                  title={project.title}
+                />
+              </div>
+            </NavLink>
+          ))}
+        </div>
       </main>
-    </>
+    </div>
   );
 }

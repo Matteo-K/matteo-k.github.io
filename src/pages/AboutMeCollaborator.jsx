@@ -8,7 +8,6 @@ function AboutMeCollaborator() {
     where: { statut: DataStatut.ACTIF },
     order: { surname: 1}
   }) : [];
-  console.log(collaborators)
   return (
     <About>
       <main id="aboutme-collaborator">

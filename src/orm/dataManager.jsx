@@ -63,7 +63,8 @@ class DataManager {
         'trophy',
         'projectTechnology',
         'trophyRoad',
-        'project'
+        'project',
+        'tag'
     ];
     
     const entitiesData = {};
