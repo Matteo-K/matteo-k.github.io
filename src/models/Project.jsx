@@ -12,7 +12,6 @@ Project.fields = {
   id: attr(),
   statut: attr(),
   title: attr(),
-  shortDescription: attr(),
   summary: attr(),
   description: attr(),
   projectTechnologies: many('ProjectTechnology'),

@@ -1,23 +1,27 @@
 import parse from 'html-react-parser';
-import { RoadType } from '../../enums/RoadType';
+import Trophies from './Trophies';
+import Collaborators from './Collaborators';
 
-function Details(props) {
+export default function Details(props) {
   const project = props.project;
-  const trophyRoads = project.trophyRoads;
-
-  const road = trophyRoads.find((element) => {
-    return element.type === RoadType.MAIN;
-  }) ?? null;
 
   return (
-    <>
+    <div className='detailsProject'>
       <div>
 
         {/* Bloc gauche - titre + lien */}
         <div>
           <figure>
-            <img src={"/image/uploads/images/project/title/" + project.illustrationTitleName} 
-              alt={project.title} title={project.title} />
+            {project.illustrationTitleName 
+              ? (
+                <img src={"/image/uploads/images/project/title/" + project.illustrationTitleName} 
+                  alt={project.title} title={project.title} />
+              ) 
+              : (
+                <h1>{project.title}</h1>
+              )
+            }
+
             <figcaption>
               {project.summary}
             </figcaption>
@@ -52,57 +56,12 @@ function Details(props) {
       </div>
 
       {/* Description */}
-      <div>
+      <div className='description block'>
         {project.description ? parse(project.description) : null}
       </div>
 
-      {/* Collaborateurs */}
-      {project.collaborators.length > 0 &&
-        <section>
-          <h2>Collaborateurs</h2>
-          {project.collaborators.map(collaborateur => (
-            <div
-              key={collaborateur.id}
-              style={
-                collaborateur.illustrationName
-                  ? {
-                      backgroundImage: `url(/image/uploads/images/collaborator/illustration/${collaborateur.illustrationName})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                    }
-                  : {}
-              }
-            >
-              <p>{collaborateur.surname} {collaborateur.name}</p>
-            </div>
-          ))}
-        </section>
-      }
-
-      {/* Trophy */}
-      {road != null &&
-        <section>
-          <h2>Trophées</h2>
-          {road.trophies.map(trophy => (
-            <div
-              key={trophy.id}
-              style={
-                trophy.illustrationName
-                  ? {
-                      backgroundImage: `url(/image/uploads/images/collaborator/illustration/${trophy.illustrationName})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                    }
-                  : {}
-              }
-            >
-              <p>{trophy.name}</p>
-            </div>
-          ))}
-        </section>
-      }
-    </>
+      <Collaborators project={project}></Collaborators>
+      <Trophies project={project}></Trophies>
+    </div>
   );
 }
-
-export default Details;

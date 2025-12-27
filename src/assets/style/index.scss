@@ -30,6 +30,7 @@ h1 {
 body {
   --color-white: #ffffff;
   --color-white-30: oklch(from var(--color-white) l c h / 0.3);
+  --color-white-10: oklch(from var(--color-white) l c h / 0.1);
   --color-black: #000000;
   --color-ps-blue: #0070cc;
   --color-ps-dark-blue: #003087;
@@ -53,6 +54,20 @@ body {
 }
 
 /* ## Constantes */
+[target="_blank"] {
+  text-decoration: none;
+  padding: 15px 85px;
+  font-weight: bold;
+  color: var(--color-white);
+  background-color: var(--color-white-10);
+  border-radius: 10px;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: var(--color-white-30);
+  }
+}
+
 .nav-link {
   color: var(--color-text-primary);
   text-decoration: none;
@@ -680,5 +695,46 @@ $animation-time: 0.4s;
         text-wrap: nowrap;
       }
     }
+  }
+}
+
+/* Details project */
+
+.detailsProject {
+  margin-top: 30vh;
+  margin-inline: 5vw;
+  min-height: 80vh;
+
+  > div:first-child {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    min-height: 20vh;
+    margin-bottom: 40px;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+    }
+
+    figure {
+      margin: 0;
+
+      + div {
+        display: flex;
+        gap: 20px;
+      }
+
+      h1, img {
+        margin: 0;
+        margin-bottom: 10px;
+        font-size: 4.5rem;
+      }
+    }
+  }
+
+  .description {
+    border-radius: 10px;
   }
 }
