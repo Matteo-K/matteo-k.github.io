@@ -14,7 +14,7 @@ export default function Login() {
 
   return (
     <>
-      <a onClick={handleLogin}>Connection</a>
+      <button onClick={handleLogin}>Connection</button>
     </>
   );
 }

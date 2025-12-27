@@ -1,5 +1,4 @@
 import { useData } from '../../../hooks/useData';
-import { Project } from '../../../models';
 
 export default function MostProjectCollaborator(props) {
   const { isLoading, error, getAllCollaborators } = useData();
