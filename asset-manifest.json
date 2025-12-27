@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.bbe58823.css",
-    "main.js": "/static/js/main.2960a1b6.js",
+    "main.css": "/static/css/main.74b374c6.css",
+    "main.js": "/static/js/main.f3f6002b.js",
     "static/js/453.bf7ba022.chunk.js": "/static/js/453.bf7ba022.chunk.js",
     "static/media/Inter-VariableFont_opsz,wght.ttf": "/static/media/Inter-VariableFont_opsz,wght.e05c5f3d1fa6a3893d84.ttf",
     "static/media/Montserrat-VariableFont_wght.ttf": "/static/media/Montserrat-VariableFont_wght.0ba081b76521874cf46c.ttf",
     "index.html": "/index.html",
-    "main.bbe58823.css.map": "/static/css/main.bbe58823.css.map",
-    "main.2960a1b6.js.map": "/static/js/main.2960a1b6.js.map",
+    "main.74b374c6.css.map": "/static/css/main.74b374c6.css.map",
+    "main.f3f6002b.js.map": "/static/js/main.f3f6002b.js.map",
     "453.bf7ba022.chunk.js.map": "/static/js/453.bf7ba022.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bbe58823.css",
-    "static/js/main.2960a1b6.js"
+    "static/css/main.74b374c6.css",
+    "static/js/main.f3f6002b.js"
   ]
 }
