@@ -58,12 +58,14 @@ export default function Projects() {
           className="border p-2 rounded flex-1"
         />
       </aside>
-      <main>
+      <main id="projets">
         {projects.map((project) => (
           <NavLink
             to={"/project/" + project.title}
           >
-            {project.title}
+            <div className="card-project">
+              <img src={"/image/uploads/images/project/card/" + project.illustrationCardName} alt={project.title} title={project.title}/>
+            </div>
           </NavLink>
         ))}
       </main>

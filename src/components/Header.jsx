@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { BurgerMenu } from "./_partials";
-import { isDragActive } from "framer-motion";
 
 export default function Header() {
   const [time, setTime] = useState(new Date());
 
   const nav_about = [
-    {"title": "profil", "lien": "/about"},
+    {"title": "profil", "lien": "/aboutme/presentation"},
     {"title": "trophées", "lien": "/trophies"},
     {"title": "Déconnexion", "lien": "/logout"},
   ]

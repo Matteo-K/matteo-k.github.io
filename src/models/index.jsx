@@ -6,3 +6,4 @@ export { default as Technology } from './Technology';
 export { default as Trophy } from './Trophy';
 export { default as ProjectTechnology } from './ProjectTechnology';
 export { default as TrophyRoad } from './TrophyRoad';
+export { default as Tag } from './Tag';

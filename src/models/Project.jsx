@@ -12,6 +12,7 @@ Project.fields = {
   id: attr(),
   statut: attr(),
   title: attr(),
+  shortDescription: attr(),
   summary: attr(),
   description: attr(),
   projectTechnologies: many('ProjectTechnology'),
@@ -28,6 +29,7 @@ Project.fields = {
   updatedAt: attr(),
   collaborators: many('Collaborator'),
   trophyRoads: many('TrophyRoad'),
+  tags: many('Tag'),
   priority: attr()
 };
 

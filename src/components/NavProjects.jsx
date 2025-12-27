@@ -1,10 +1,9 @@
 import { useData } from '../hooks/useData';
 import { DataStatut } from '../enums/DataStatut';
 
-import { Navigation, A11y } from 'swiper/modules';
+import { A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
-import 'swiper/css/navigation';
 import { useState } from 'react';
 
 export default function NavProjects(props) {
@@ -26,9 +25,9 @@ export default function NavProjects(props) {
     props.setProject(project);
   };
   return (
-    <nav>
+    <nav id="home-nav-projects">
       <Swiper
-        modules={[Navigation, A11y]}
+        modules={[A11y]}
         slidesPerView={1}
         width="106"
         centeredSlides={true}
@@ -40,7 +39,6 @@ export default function NavProjects(props) {
           slideShadows: false,
         }}
         spaceBetween={30}
-        navigation
         onSwiper={setSwipperRef}
         onSlideChange={(swiper) => {
           const project = projects[swiper.activeIndex - 1];
@@ -55,7 +53,7 @@ export default function NavProjects(props) {
         <SwiperSlide key={0} onClick={() => slideTo(0)}>
           {({ isActive }) => (
             <>
-              <div className={"card-project " + ( isActive ? 'active' : '' )}>
+              <div className={"card-project size " + ( isActive ? 'active' : '' )}>
                 <img src="/image/icons/menu.svg" alt="Menu" title="Menu" className='icon'/>
               </div>
               { isActive && 
@@ -70,7 +68,7 @@ export default function NavProjects(props) {
           <SwiperSlide key={index + 1} data-project-id={project.id} onClick={() => slideTo(index + 1)}>
             {({ isActive }) => (
               <>
-                <div className={"card-project " + ( isActive ? 'active' : '' )}>
+                <div className={"card-project size " + ( isActive ? 'active' : '' )}>
                   <img src={"/image/uploads/images/project/card/" + project.illustrationCardName} alt={project.title} title={project.title}/>
                 </div>
                 { isActive && 
@@ -85,7 +83,7 @@ export default function NavProjects(props) {
         <SwiperSlide key={projects.length + 1} onClick={() => slideTo(projects.length + 1)}>
           {({ isActive }) => (
             <>
-              <div className={"card-project " + ( isActive ? 'active' : '' )}>
+              <div className={"card-project size " + ( isActive ? 'active' : '' )}>
                 <img src="/image/icons/projects.svg" alt="Projects" title="Projects" className='icon'/>
               </div>
               { isActive && 

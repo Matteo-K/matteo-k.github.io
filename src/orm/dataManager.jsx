@@ -153,6 +153,7 @@ class DataManager {
           updatedAt: tph.updatedAt,
         }))
         : [],
+      tags: project.tags.toRefArray(),
     };
   }
 
@@ -257,6 +258,62 @@ class DataManager {
     const collaborator = this.getSession().Collaborator.withId(collaboratorId);
     return collaborator ? collaborator.projects.toModelArray() : [];
   }
+
+  getCollaborators({ where = {}, order = {}, limit = -1 } = {}) {
+    let query = this.getSession().Collaborator.all();
+
+    // Filtrage
+    if (where && Object.keys(where).length > 0) {
+      query = query.filter(collaborator => {
+        return Object.entries(where).every(([key, condition]) => {
+          const collaboratorValue = String(collaborator[key] || "").toUpperCase();
+
+          if (typeof condition === "string") {
+            return collaboratorValue === condition.toUpperCase();
+          }
+
+          if (typeof condition === "object") {
+            if (condition.equals) {
+              return collaboratorValue === condition.equals.toUpperCase();
+            }
+            if (condition.contains) {
+              return collaboratorValue.includes(condition.contains.toUpperCase());
+            }
+            if (condition.startsWith) {
+              return collaboratorValue.startsWith(condition.startsWith.toUpperCase());
+            }
+            if (condition.endsWith) {
+              return collaboratorValue.endsWith(condition.endsWith.toUpperCase());
+            }
+          }
+
+          return true;
+        });
+      });
+    }
+
+    // Hydratation des projets
+    let collaborators = query.toModelArray();
+
+    // Tri
+    if (order && Object.keys(order).length > 0) {
+      collaborators.sort((a, b) => {
+        for (const [key, direction] of Object.entries(order)) {
+          if (a[key] < b[key]) return -1 * direction;
+          if (a[key] > b[key]) return 1 * direction;
+        }
+        return 0;
+      });
+    }
+
+    // Limite
+    if (limit > -1) {
+      collaborators = collaborators.slice(0, limit);
+    }
+
+    return collaborators;
+  }
+
   
   getSocietyProjects(societyId) {
     return this.getSession().Project.filter({ society: societyId }).toModelArray();
@@ -265,8 +322,16 @@ class DataManager {
   getProjectTechnologies(projectId) {
     const project = this.getSession().Project.withId(projectId);
     if (!project) return [];
-      
+
     return project.projectTechnologies.toModelArray().map(pt => pt.technology);
+  }
+
+  countTrophyByType(type) {
+    return this.getSession().Trophy.filter({ type, accomplished: true }).count();
+  }
+
+  getAllTags() {
+    return this.getSession().Tag.all().toModelArray();
   }
 }
 

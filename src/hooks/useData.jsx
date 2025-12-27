@@ -11,6 +11,12 @@ export function useData() {
       dataManager.getProjects({ where, order, limit }),
     []
   );
+
+  const getCollaborators = useCallback(
+    ({ where = {}, order = {}, limit = -1 } = {}) =>
+      dataManager.getCollaborators({ where, order, limit }),
+    []
+  );
   
   useEffect(() => {
     const loadData = async () => {
@@ -34,6 +40,7 @@ export function useData() {
     error, 
     session,
     getProjects,
+    getCollaborators,
     // Méthodes helper
     getAllProjects: () => dataManager.getAllProjects(),
     getAllProjectsSortedByPriority: (descending) => dataManager.getAllProjectsSortedByPriority(descending),
@@ -44,6 +51,8 @@ export function useData() {
     getCollaboratorProjects: (id) => dataManager.getCollaboratorProjects(id),
     getSocietyProjects: (id) => dataManager.getSocietyProjects(id),
     getProjectTechnologies: (id) => dataManager.getProjectTechnologies(id),
+    countTrophyByType: (type) => dataManager.countTrophyByType(type),
+    getAllTags: () => dataManager.getAllTags(),
   };
 }
 

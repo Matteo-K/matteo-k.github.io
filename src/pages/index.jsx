@@ -1,5 +1,7 @@
 export { default as Home } from "./Home";
-export { default as About } from "./About";
+export { default as AboutMePresentation } from "./AboutMePresentation";
+export { default as AboutMeCollaborator } from "./AboutMeCollaborator";
+export { default as AboutMeProject } from "./AboutMeProject";
 export { default as Contact } from "./Contact";
 export { default as Project } from "./Project";
 export { default as Trophies } from "./Trophies";
