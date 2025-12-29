@@ -58,14 +58,25 @@ const { isLoadingTrophy, error, countTrophyByType } = useData();
 
   return (
     <section className={props.className + " block trophies"}>
-      <div className="title">
-        <h2>{ props.children ? props.children : "Trophies"}</h2>
-        {props.total && <span>
+      <div className={"title" + (props.total ? " total" : " card")}>
+        <div>
+          {!props.total &&
+          (
+            <img 
+              src="/image/icons/trophy.svg"
+              alt="Trophée"
+              title="Trophée"
+            />
+          )}
+          <h2>{ props.children ? props.children : "Trophies"}</h2>
+        </div>
+        <span>
+          Total :&nbsp;
           {Object.entries(enrichedTrophies).reduce(
             (accumulator, [,currentValue]) => accumulator + currentValue.count,
             0
           )}
-        </span>}
+        </span>
       </div>
       <div className='content'>
         {Object.entries(enrichedTrophies).map(([key, trophy]) => (

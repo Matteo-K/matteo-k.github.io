@@ -9,6 +9,7 @@ export default function Collaborators(props) {
           <h2>Collaborateurs</h2>
           {project.collaborators.map(collaborateur => (
             <div
+              className="block"
               key={collaborateur.id}
               style={
                 collaborateur.illustrationName
@@ -17,7 +18,11 @@ export default function Collaborators(props) {
                       backgroundSize: 'cover',
                       backgroundPosition: 'center',
                     }
-                  : {}
+                  : {
+                    backgroundImage: `url(/image/avatar/1.png`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                  }
               }
             >
               <p>{collaborateur.surname} {collaborateur.name}</p>

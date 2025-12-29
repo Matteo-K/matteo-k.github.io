@@ -52,17 +52,18 @@ body {
 }
 
 /* ## Constantes */
-[target=_blank] {
+.button-external-link {
   text-decoration: none;
   padding: 15px 85px;
   font-weight: bold;
   color: var(--color-white);
   background-color: var(--color-white-10);
-  border-radius: 10px;
+  border-radius: 50px;
   transition: all 0.2s;
 }
-[target=_blank]:hover {
-  background-color: var(--color-white-30);
+.button-external-link:hover {
+  color: var(--color-background-card);
+  background-color: var(--color-white);
 }
 
 .nav-link {
@@ -76,9 +77,8 @@ body {
 
 .border-hover {
   position: relative;
-  border-radius: 10px;
 }
-.border-hover:hover:before, .border-hover:focus:before, .border-hover.active {
+.border-hover:hover:before, .border-hover:focus:before, .border-hover.active:before {
   content: "";
   position: absolute;
   top: 0;
@@ -89,6 +89,41 @@ body {
   border-radius: inherit;
   background: linear-gradient(to right, var(--color-border-100), var(--color-border-0));
   margin: -5px;
+}
+
+.tooltips {
+  position: relative;
+  cursor: pointer;
+}
+.tooltips:hover::after, .tooltips:hover::before {
+  opacity: 1;
+}
+.tooltips::after {
+  content: attr(data-content);
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-background-third);
+  color: var(--color-text-primary);
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.tooltips::before {
+  content: "";
+  position: absolute;
+  bottom: 98%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--color-background-third);
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
 .checkbox {
@@ -270,6 +305,59 @@ header .nav-link.active {
     transform: translate(100%, 0);
   }
 }
+/* Illustration */
+.illustration {
+  position: relative;
+  padding: 20px;
+  min-width: 250px;
+  aspect-ratio: 9/16;
+  background-color: var(--color-background-third);
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 20px;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  box-shadow: inset 0 -60px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.illustration p {
+  margin: 0;
+  padding: 10px 15px;
+  border-radius: 12px;
+  font-weight: bold;
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--color-text-primary);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  text-align: center;
+  width: 90%;
+}
+.illustration:hover {
+  transform: translateY(-5px);
+  box-shadow: inset 0 -60px 20px rgba(0, 0, 0, 0.25), 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+.illustration.platinum {
+  border: 2px solid #e5e4e2;
+  background-color: linear-gradient(to top, #e5e4e2 0%, var(--color-background-third) 60%);
+  box-shadow: inset 0 -60px 25px rgba(255, 255, 255, 0.2);
+}
+.illustration.gold {
+  border: 2px solid #ffd700;
+  background-color: linear-gradient(to top, #ffd700 0%, var(--color-background-third) 60%);
+  box-shadow: inset 0 -60px 25px rgba(255, 223, 0, 0.3);
+}
+.illustration.silver {
+  border: 2px solid #c0c0c0;
+  background-color: linear-gradient(to top, #c0c0c0 0%, var(--color-background-third) 60%);
+  box-shadow: inset 0 -60px 25px rgba(192, 192, 192, 0.3);
+}
+.illustration.bronze {
+  border: 2px solid #cd7f32;
+  background-color: linear-gradient(to top, #cd7f32 0%, var(--color-background-third) 60%);
+  box-shadow: inset 0 -60px 25px rgba(205, 127, 50, 0.3);
+}
+
 /* Block */
 .block {
   background-color: var(--color-background-secondary);
@@ -281,6 +369,9 @@ header .nav-link.active {
   min-width: auto;
 }
 
+#home-menu h2 {
+  margin-block: 5px;
+}
 #home-menu > div:nth-child(2) {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -304,6 +395,10 @@ header .nav-link.active {
 #home-menu .collaborateur {
   grid-area: 1/2/2/3;
 }
+#home-menu .collaborateur a {
+  text-decoration: none;
+  color: inherit;
+}
 #home-menu .collaborateur figure {
   width: 100%;
   margin: 5px;
@@ -313,8 +408,9 @@ header .nav-link.active {
   text-align: center;
 }
 #home-menu .collaborateur img {
-  width: 5vw;
+  width: 60%;
   aspect-ratio: 1/1;
+  border-radius: 50%;
 }
 #home-menu .collaborateur .content {
   display: flex;
@@ -406,10 +502,25 @@ header .nav-link.active {
   display: flex;
   flex-direction: column;
 }
+.trophies .title.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--color-white);
+  font-weight: bold;
+}
+.trophies .title.card div {
+  display: flex;
+  gap: 10px;
+}
+.trophies .title.card span {
+  font-size: 1.5rem;
+}
 .trophies > div:nth-child(2) {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  gap: 10%;
   flex: 1;
 }
 .trophies figure {
@@ -419,6 +530,9 @@ header .nav-link.active {
   margin: 0;
   font-weight: bold;
   font-size: 1.5rem;
+}
+.trophies figure img {
+  width: 80%;
 }
 
 .recentproject figure, .mostprojectcollaborator figure {
@@ -618,7 +732,7 @@ header .nav-link.active {
   align-items: end;
   justify-content: space-between;
   min-height: 20vh;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 .detailsProject > div:first-child > div {
   display: flex;
@@ -628,17 +742,71 @@ header .nav-link.active {
 .detailsProject > div:first-child figure {
   margin: 0;
 }
-.detailsProject > div:first-child figure + div {
-  display: flex;
-  gap: 20px;
-}
 .detailsProject > div:first-child figure h1, .detailsProject > div:first-child figure img {
   margin: 0;
   margin-bottom: 10px;
   font-size: 4.5rem;
 }
-.detailsProject .description {
+.detailsProject > div:first-child figure figcaption {
+  color: var(--color-text-secondary);
+}
+.detailsProject section {
+  margin-block: 5vh;
+}
+.detailsProject .action {
+  display: flex;
+  gap: 20px;
+  min-height: 50px;
+}
+.detailsProject .info {
+  display: flex;
+  gap: 20px;
+}
+.detailsProject .info .skill {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+.detailsProject .info .skill h2 {
+  margin-block: 5px;
+}
+.detailsProject .info .skill .content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  align-items: center;
+  flex: 1;
+}
+.detailsProject .info .skill figure {
+  display: flex;
+  gap: 10px;
+  margin: 0;
+}
+.detailsProject .info .skill figure img {
+  width: 50px;
+  aspect-ratio: 1/1;
+}
+.detailsProject .info .skill figure figcaption div:nth-child(1) {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.detailsProject .info .skill figure figcaption div:nth-child(2) {
+  color: var(--color-text-secondary);
+}
+.detailsProject .info .description {
+  flex: 1;
+}
+.detailsProject .info div {
   border-radius: 10px;
+}
+
+.detailsTrophy .content {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 20px;
+  padding: 20px;
+  overflow-x: scroll;
 }
 
 #login {
