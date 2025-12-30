@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useData } from "../hooks/useData";
 import { DataStatut } from "../enums/DataStatut";
-import Details from "../components/Project/Details";
 import { Page } from "../components/_partials";
+import NotFound from "../components/NotFound";
+import Details from "../components/Project/Details";
 
 export default function Project() {
   const { title } = useParams();
@@ -15,14 +16,22 @@ export default function Project() {
     where: { title: title, statut: DataStatut.ACTIF },
   })[0];
 
-  if (!project) return <div>Projet introuvable</div>;
+  if (!project) return <NotFound></NotFound>;
 
   return (
     <Page>
-      <div>
-        {project.title}
+      <div id="project-info">
+        <header>
+          <figure>
+            <img src={"/image/uploads/images/project/card/" + project.illustrationCardName}
+              alt={project.title}
+              title={project.title}
+            />
+            <figcaption>{project.title}</figcaption>
+          </figure>
+        </header>
+        <Details project={project}></Details>
       </div>
-      <Details project={project} />
     </Page>
   );
 }

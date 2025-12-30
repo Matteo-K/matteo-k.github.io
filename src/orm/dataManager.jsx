@@ -327,9 +327,25 @@ class DataManager {
     return project.projectTechnologies.toModelArray().map(pt => pt.technology);
   }
 
-  countTrophyByType(type) {
-    return this.getSession().Trophy.filter({ type, accomplished: true }).count();
+  countTrophyByType(type, project = null) {
+    // Cas 1 : projet hydraté (objet JS)
+    if (project) {
+      // Vérifie que trophyRoads existe
+      const trophies = project.trophyRoads
+        ? project.trophyRoads.flatMap(tr => tr.trophies || [])
+        : [];
+
+      // Filtre par type et accomplished
+      return trophies.filter(t => t.type === type && t.accomplished).length;
+    }
+
+    // Cas 2 : projet non défini, utiliser Redux-ORM
+    return this.getSession().Trophy.filter({
+      type,
+      accomplished: true
+    }).count();
   }
+
 
   getAllTags() {
     return this.getSession().Tag.all().toModelArray();

@@ -5,6 +5,21 @@ import Skill from './Skill';
 
 export default function Details(props) {
   const project = props.project;
+  const date = new Date(project.date);
+  const month = [
+    "Janvier",
+    "Février",
+    "Mars",
+    "Avril",
+    "Mai",
+    "Juin",
+    "Juillet",
+    "Août",
+    "Septembre",
+    "Octobre",
+    "Novembre",
+    "Décembre"
+  ]
 
   return (
     <div className='detailsProject'>
@@ -35,28 +50,34 @@ export default function Details(props) {
         </div>
       </div>
 
-      <section className='action'>
-        {/* Web */}
-        {project.web && 
-          <a href={project.web}
-            target="_blank" rel="noreferrer"
-            className='button-external-link border-hover'
-          > 
-            Visiter le site
-          </a>
-        }
+      <div className='line-link'>
+        <section className='action'>
+          {/* Web */}
+          {project.web && 
+            <a href={project.web}
+              target="_blank" rel="noreferrer"
+              className='button-external-link border-hover'
+            > 
+              Visiter le site
+            </a>
+          }
 
-        {/* Code source */}
-        {project.github && 
-          <a href={project.github}
-            target="_blank" rel="noreferrer"
-            className='button-external-link border-hover'
-          > 
-            Code source
-          </a>
-        }
+          {/* Code source */}
+          {project.github && 
+            <a href={project.github}
+              target="_blank" rel="noreferrer"
+              className='button-external-link border-hover'
+            > 
+              Code source
+            </a>
+          }
 
-      </section>
+        </section>
+
+        <time dateTime={month[date.getMonth()] + " " + date.getFullYear()} className='block'>
+          {month[date.getMonth()] + " " + date.getFullYear()}
+        </time>
+      </div>
 
       {/* Description */}
       <section className='info'>

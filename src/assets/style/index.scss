@@ -82,6 +82,7 @@ body {
 
 .border-hover {
   position: relative;
+  cursor: pointer;
 
   &:hover:before, &:focus:before, &.active:before {
     content: "";
@@ -167,6 +168,114 @@ body {
     width: 65%;
     aspect-ratio: 1/1;
     background-color: var(--color-background-third);
+  }
+}
+
+.shine {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(255, 255, 255, 0.35),
+      transparent
+    );
+    transform: translateX(-100%);
+    pointer-events: none;
+  }
+
+  &:hover::after {
+    animation: shine 0.8s ease;
+  }
+}
+
+@keyframes shine {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* erreur 404 */
+#e404 {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-align: center;
+
+  animation: fadeIn 0.8s ease forwards;
+
+  h1 {
+    font-size: clamp(6rem, 15vw, 10rem);
+    font-weight: 800;
+    position: relative;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  p {
+    font-size: 1.2rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+    animation-delay: 0.3s;
+  }
+
+  .cta {
+    margin-top: 1.5rem;
+    text-decoration: none;
+    color: var(--color-text-primary);
+    background: var(--color-background-third);
+    padding: 12px 26px;
+    border-radius: 12px;
+    font-weight: 500;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+    animation-delay: 0.5s;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+
+/* Animations */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
   }
 }
 
@@ -419,8 +528,8 @@ $animation-time: 0.4s;
     grid-template-rows: repeat(3, 1fr);
     grid-column-gap: 25px;
     grid-row-gap: 25px;
-    margin: 10px;
-    overflow: auto;
+    padding: 10px;
+    overflow: scroll;
   }
 
   .description {
@@ -572,7 +681,7 @@ $animation-time: 0.4s;
   display: flex;
   flex-direction: column; 
 
-  .title.card {
+  .title.trophies-menu {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -589,25 +698,73 @@ $animation-time: 0.4s;
     }
   }
 
-  > div:nth-child(2) {
+  .content {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     gap: 10%;
     flex: 1;
+
+    figure {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0;
+      font-weight: bold;
+      font-size: 1.5rem;
+  
+      img {
+        width: 50px;
+      }
+    }
   }
 
-  figure {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 0;
+}
+
+.trophies.trophies-summary {
+  flex-direction: row;
+  width: 600px;
+
+  span {
     font-weight: bold;
     font-size: 1.5rem;
+  }
+}
 
+.trophies.trophies-projects {
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--color-background-secondary);
+  padding: 20px;
+  margin: 20px 30px;
+  border-radius: 20px;
+
+  .title {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+  
     img {
-      width: 80%;
+      width: 125px;
+      aspect-ratio: 1/1;
+      border-radius: 10px;
     }
+
+    figcaption {
+      font-size: 1.5rem;
+      font-weight: bold;
+
+      div {
+        height: 30px;
+      }
+    }
+  }
+  
+  .content {
+    align-items: center;
+    flex-wrap: wrap;
   }
 }
 
@@ -833,9 +990,15 @@ $animation-time: 0.4s;
 }
 
 /* Details project */
+#home .detailsProject {
+  margin-top: 30vh;
+}
+
+#project-info .detailsProject {
+  margin-top: 20vh;
+}
 
 .detailsProject {
-  margin-top: 30vh;
   margin-inline: 5vw;
   min-height: 80vh;
 
@@ -870,6 +1033,16 @@ $animation-time: 0.4s;
 
   section {
     margin-block: 5vh;
+  }
+
+  .line-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .block {
+      min-width: auto;
+    }
   }
 
   .action {
@@ -968,6 +1141,20 @@ $animation-time: 0.4s;
     > img:first-child {
       border-radius: 50%;
       border: var(--color-border-100) 5px solid;
+    }
+  }
+}
+
+#project-info {
+  header figure {
+    gap: 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+
+    img {
+      width: 100px;
+      aspect-ratio: 1/1;
+      border-radius: 10px;
     }
   }
 }

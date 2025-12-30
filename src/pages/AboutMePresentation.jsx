@@ -6,7 +6,7 @@ function AboutMePresentation() {
     <About>
       <main id="aboutme-presentation">
         <div>
-          <Trophies total="true" className="aboutme">Trophées obtenues :</Trophies>
+          <Trophies type="profil" className="aboutme">Trophées obtenues :</Trophies>
           <RecentProject className="aboutme"></RecentProject>
           <MostProjectCollaborator classNale="aboutme"></MostProjectCollaborator>
         </div>

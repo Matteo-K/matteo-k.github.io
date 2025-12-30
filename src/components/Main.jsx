@@ -9,7 +9,7 @@ export default function Main() {
 
   return (
     <>
-      <main>
+      <main id="home">
         <NavProjects project={project} setProject={setProject} />
         {project && typeof project === 'object' && <Details project={project} />}
 

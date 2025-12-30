@@ -51,7 +51,7 @@ export function useData() {
     getCollaboratorProjects: (id) => dataManager.getCollaboratorProjects(id),
     getSocietyProjects: (id) => dataManager.getSocietyProjects(id),
     getProjectTechnologies: (id) => dataManager.getProjectTechnologies(id),
-    countTrophyByType: (type) => dataManager.countTrophyByType(type),
+    countTrophyByType: (type, project) => dataManager.countTrophyByType(type, project),
     getAllTags: () => dataManager.getAllTags(),
   };
 }

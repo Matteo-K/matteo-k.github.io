@@ -2,9 +2,11 @@ import { useData } from '../../../hooks/useData';
 import { TrophyType } from '../../../enums/TrophyType';
 import React from 'react';
 
-export default function Trophies(props) {
+import { Menu, Profil, Projects, Summary } from "./TrophyDisplay"
 
-const { isLoadingTrophy, error, countTrophyByType } = useData();
+export default function Trophies(props) {
+  const project = props.project ?? null
+  const { isLoadingTrophy, error, countTrophyByType } = useData();
   // Trophée
   let trophies = React.useMemo(() => ({
     "platinium": {
@@ -33,6 +35,34 @@ const { isLoadingTrophy, error, countTrophyByType } = useData();
     }
   }), []);
 
+  const TROPHIES_CONFIG = {
+    menu: {
+      showTotal: true,
+      className: "trophies-menu",
+      view: Menu,
+      navigation: "/trophies"
+    },
+    profil: {
+      showTotal: true,
+      className: "trophies-profil",
+      view: Profil,
+      navigation: "/trophies"
+    },
+    projects: {
+      showTotal: false,
+      className: "trophies-projects",
+      view: Projects,
+      navigation: "/project/trophy/" + project?.title
+    },
+    summary: {
+      showTotal: true,
+      className: "trophies-summary",
+      view: Summary,
+      navigation: "/project/trophy/" + project?.title
+    }
+  };
+  const config = TROPHIES_CONFIG[props.type] ?? TROPHIES_CONFIG.menu;
+
   const enrichedTrophies = React.useMemo(() => {
     // Si les données sont en cours de chargement, retourner les trophées par défaut
     if (isLoadingTrophy || error) {
@@ -46,7 +76,10 @@ const { isLoadingTrophy, error, countTrophyByType } = useData();
           key,
           {
             ...trophy,
-            count: countTrophyByType(trophy.type)
+            count: countTrophyByType(
+              trophy.type,
+              project ? project : null
+            )
           }
         ])
       );
@@ -54,42 +87,13 @@ const { isLoadingTrophy, error, countTrophyByType } = useData();
       console.error('Erreur lors du comptage des trophées:', error);
       return trophies;
     }
-  }, [isLoadingTrophy, error, trophies, countTrophyByType]);
+  }, [isLoadingTrophy, error, project, trophies, countTrophyByType]);
 
   return (
-    <section className={props.className + " block trophies"}>
-      <div className={"title" + (props.total ? " total" : " card")}>
-        <div>
-          {!props.total &&
-          (
-            <img 
-              src="/image/icons/trophy.svg"
-              alt="Trophée"
-              title="Trophée"
-            />
-          )}
-          <h2>{ props.children ? props.children : "Trophies"}</h2>
-        </div>
-        <span>
-          Total :&nbsp;
-          {Object.entries(enrichedTrophies).reduce(
-            (accumulator, [,currentValue]) => accumulator + currentValue.count,
-            0
-          )}
-        </span>
-      </div>
-      <div className='content'>
-        {Object.entries(enrichedTrophies).map(([key, trophy]) => (
-          <figure key={key}>
-            <img 
-              src={`/image/icons/trophy/${trophy.img}`} 
-              alt={trophy.alt}
-              title={trophy.alt}
-            />
-            <figcaption>{trophy.count}</figcaption>
-          </figure>
-        ))}
-      </div>
-    </section>
+    <config.view
+      trophies={enrichedTrophies}
+      config={config}
+      {...props}
+    />
   );
 }

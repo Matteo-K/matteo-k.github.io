@@ -12,10 +12,11 @@ export default function NavProjects(props) {
     
   if (isLoading) return <div>🔄 Chargement...</div>;
   if (error) return <div>❌ Erreur: {error}</div>;
-  const projects = getProjects({
+  const projects = !isLoading && !error ? getProjects({
     where: { statut: DataStatut.ACTIF },
-    order: { priority: 1}
-  });
+    order: { priority: 1},
+    limit: 10
+  }) : [];
 
   const slideTo = (index) => {
     swipperRef.slideTo(index, 0);
@@ -24,6 +25,29 @@ export default function NavProjects(props) {
   const setSlide = (project) => {
     props.setProject(project);
   };
+
+  const getInitialSlide = () => {
+    const params = new URLSearchParams(window.location.search);
+    const slide = params.get("slide");
+
+    if (slide === "last") return projects.length + 1;
+    const index = parseInt(slide, 10);
+    return isNaN(index) ? 0 : index;
+  };
+
+  const updateURL = (index) => {
+    const params = new URLSearchParams(window.location.search);
+
+    if (index === projects.length + 1) {
+      params.set("slide", "last");
+    } else {
+      params.set("slide", index);
+    }
+
+    window.history.pushState({}, "", `?${params.toString()}`);
+  };
+
+
   return (
     <nav id="home-nav-projects">
       <Swiper
@@ -39,8 +63,11 @@ export default function NavProjects(props) {
           slideShadows: false,
         }}
         spaceBetween={30}
+        initialSlide={getInitialSlide()}
         onSwiper={setSwipperRef}
         onSlideChange={(swiper) => {
+          const index = swiper.activeIndex;
+          updateURL(index);
           const project = projects[swiper.activeIndex - 1];
           if (project === undefined) {
             if (swiper.activeIndex === projects.length + 1) {

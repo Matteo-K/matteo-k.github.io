@@ -6,6 +6,10 @@ function Contact() {
     <Page>
       <Header />
       <h1>Contact</h1>
+      <p>
+        Portfolio en construction, merci pour votre compréhension
+      </p>
+      <a href="mailto:kervadecmatteo@gmail.com">Envoyer un email</a>
     </Page>
   );
 }

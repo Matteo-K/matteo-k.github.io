@@ -16,7 +16,7 @@ export default function Menu () {
         <Collaborator></Collaborator>
         <Stat></Stat>
         <Galerie></Galerie>
-        <Trophies>Trophées</Trophies>
+        <Trophies type="menu">Trophées</Trophies>
       </div>
     </div>
   )
