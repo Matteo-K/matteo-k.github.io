@@ -6,7 +6,7 @@ export default function Collaborator() {
   
   const collaborator = !isLoading && !error ? getCollaborators({ limit: 4 }) : [];
   return (
-    <section className="block collaborateur">
+    <section className="block collaborateur border-hover">
       <NavLink
         to="/aboutme/collaborators"
         end

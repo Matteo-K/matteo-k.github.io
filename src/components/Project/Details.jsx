@@ -1,6 +1,7 @@
 import parse from 'html-react-parser';
 import Trophies from './Trophies';
-import Collaborators from './Collaborators';
+import { Trophies as CountTrophies } from "../_partials/Menu"
+// import Collaborators from './Collaborators';
 import Skill from './Skill';
 
 export default function Details(props) {
@@ -79,12 +80,14 @@ export default function Details(props) {
         </time>
       </div>
 
+      <div className='block description'>
+        {project.description ? parse(project.description) : null}
+      </div>
+
       {/* Description */}
       <section className='info'>
+        <CountTrophies project={project}></CountTrophies>
         <Skill project={project}></Skill>
-        <div className='block description'>
-          {project.description ? parse(project.description) : null}
-        </div>
       </section>
 
       {/* <Collaborators project={project}></Collaborators> */}

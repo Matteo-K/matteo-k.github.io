@@ -1,3 +1,5 @@
+import TrophyTypeImg from "../../../image/TrophyTypeImg";
+
 export default function Summary(props) {
   const config = props.config;
   return (
@@ -14,11 +16,7 @@ export default function Summary(props) {
       <div className='content'>
         {Object.entries(props.trophies).map(([key, trophy]) => (
           <figure key={key}>
-            <img 
-              src={`/image/icons/trophy/${trophy.img}`} 
-              alt={trophy.alt}
-              title={trophy.alt}
-            />
+            <TrophyTypeImg type={trophy.type}>{trophy.alt}</TrophyTypeImg>
             <figcaption>{trophy.count}</figcaption>
           </figure>
         ))}

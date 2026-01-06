@@ -1,27 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import TrophyTypeImg from "../../../image/TrophyTypeImg";
 
-export default function Projects(props) {
+export default function Road(props) {
   const config = props.config;
   const navigate = useNavigate();
-  const project = props.project;
+  const road = props.road;
 
   return (
-    <section className={"trophies border-hover " + props.config.className}
+    <section className={"trophies border border-hover " + props.config.className}
       onClick={() => navigate(config.navigation)}
     >
-      <figure className="title">
-        <img src={"/image/uploads/images/project/card/" + project.illustrationCardName}
-          alt={project.title}
-          title={project.title}
-        />
-        <figcaption>
-          <div>{project.title}</div>
-          {project.summary && (
-            <div>{project.summary}</div>
-          )}
-        </figcaption>
-      </figure>
+      <div className="title">
+        <h2>{road.name}</h2>
+      </div>
+      {/* <img src={"/image/uploads/images/project/card/" + project.illustrationCardName}
+        alt={project.title}
+        title={project.title}
+      /> */}
       <div className='content'>
         {config.showTotal ?? (
           <span>

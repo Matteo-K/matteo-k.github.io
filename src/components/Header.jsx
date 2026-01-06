@@ -6,8 +6,8 @@ export default function Header() {
   const [time, setTime] = useState(new Date());
 
   const nav_about = [
-    {"title": "profil", "lien": "/aboutme/presentation"},
-    {"title": "trophées", "lien": "/trophies"},
+    {"title": "Mon profil", "lien": "/aboutme/presentation"},
+    {"title": "Mes trophées", "lien": "/trophies"},
     {"title": "Déconnexion", "lien": "/logout"},
   ]
   

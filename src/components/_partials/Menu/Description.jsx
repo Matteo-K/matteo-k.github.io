@@ -15,7 +15,7 @@ export default function Description() {
         </ul>
       </div>
       <NavLink
-        to={"/aboutme/presentation"}
+        to="/aboutme/presentation"
         end
         className={({isActive}) => (
           "nav-link " + (isActive ? "active" : "")

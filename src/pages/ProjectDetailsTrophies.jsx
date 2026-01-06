@@ -2,13 +2,12 @@ import { Page } from "../components/_partials";
 import { useParams } from "react-router-dom";
 import { useData } from "../hooks/useData";
 import { DataStatut } from "../enums/DataStatut";
-import { Trophies } from "../components/_partials/Menu";
-import HeadTrophyPage from "../components/_partials/HeadTrophyPage"
+import HeadTrophyPage from "../components/_partials/HeadTrophyPage";
 import NotFound from "../components/NotFound";
 import ListTrophyRoad from "../components/Project/ListTrophyRoad";
 
-export default function ProjectTrophy () {
-  const { title } = useParams();
+export default function ProjectDetailsTrophies () {
+  const { title, trophyRoadId } = useParams();
   const { isLoading, error, getProjects } = useData();
 
   if (isLoading) return <div>🔄 Chargement...</div>;
@@ -20,24 +19,15 @@ export default function ProjectTrophy () {
 
   if (!project) return <NotFound></NotFound>;
 
+  const road = project.trophyRoads.find((road) => road.id.toString() === trophyRoadId.toString());
+  if (!road) return <NotFound></NotFound>;
+  console.log(road);
   return (
     <Page>
       <HeadTrophyPage project={project}></HeadTrophyPage>
       <main>
-        {project.trophyRoads.length <= 1 
-        ? (
-          <ListTrophyRoad road={project.trophyRoads[0]}>
-          </ListTrophyRoad>
-        )
-        : (
-          <>
-            {project.trophyRoads.map((road) => {
-              return (
-                <Trophies type="road" project={project} road={road}></Trophies>
-              );
-            })}
-          </>
-        )}
+        <ListTrophyRoad road={road}>
+        </ListTrophyRoad>
       </main>
     </Page>
   );
