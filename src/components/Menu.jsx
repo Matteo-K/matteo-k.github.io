@@ -1,4 +1,5 @@
 import { Description, Collaborator, Stat, Galerie, Trophies } from './_partials/Menu';
+import { Tag } from './_partials/'
 
 export default function Menu () {
   return (
@@ -6,7 +7,8 @@ export default function Menu () {
       {/* Badge */}
       <div>
         <div className="tags">
-          je suis un tag
+          <Tag>Développeur web chez <strong>e-declic</strong></Tag>
+          <Tag>Étudiant en 3ème année à <strong>IUT Lannion</strong></Tag>
         </div>
       </div>
 

@@ -80,6 +80,30 @@ body {
   }
 }
 
+.linkBack {
+  margin: 25px;
+  display: flex;
+  justify-content: end;
+
+  a {
+    padding: 10px;
+    background-color: var(--color-background-third);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border-radius: 10px;
+
+    &:hover {
+      color: var(--color-white);
+    }
+  }
+}
+
+.tag {
+  padding: 10px 20px;
+  background-color: var(--color-background-secondary);
+  border-radius: 50px;
+}
+
 .border-hover {
   position: relative;
   cursor: pointer;
@@ -522,6 +546,12 @@ $animation-time: 0.4s;
     margin-block: 5px;
   }
 
+  .tags {
+    display: flex;
+    margin-inline: 10px;
+    gap: 10px;
+  }
+
   > div:nth-child(2) {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -536,11 +566,37 @@ $animation-time: 0.4s;
     grid-area: 1 / 1 / 4 / 2;
 
     a {
+      color: var(--color-accent);
+    }
+
+    h3 {
+      font-size: 2.5rem;
+      line-height: 1.2;
+      margin-block: 1rem;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      color: var(--color-white);
+    }
+
+    .citation {
+      font-style: italic;
+      margin-bottom: 2rem;
+      color: var(--color-text-secondary);
+    }
+
+    .nav-link {
       background-color: var(--color-white);
       color: var(--color-black);
       padding: 5px 10px;
       border-radius: 5px;
       width: fit-content;
+
+      &:hover {
+        background-color: var(--color-border-100);
+      }
     }
   }
 
@@ -579,6 +635,8 @@ $animation-time: 0.4s;
 
   .gallerie {
     grid-area: 1 / 3 / 3 / 4;
+    background: url("../image/e-declic_nature.jpg")
+    center / cover no-repeat;
   }
 
   .trophies {
@@ -621,6 +679,10 @@ $animation-time: 0.4s;
   header {
     figure {
       justify-content: start;
+    }
+
+    a {
+      color: var(--color-accent);
     }
 
     img {

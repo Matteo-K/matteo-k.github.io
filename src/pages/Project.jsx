@@ -4,6 +4,7 @@ import { DataStatut } from "../enums/DataStatut";
 import { Page } from "../components/_partials";
 import NotFound from "../components/NotFound";
 import Details from "../components/Project/Details";
+import { NavLink } from "react-router-dom";
 
 export default function Project() {
   const { title } = useParams();
@@ -29,6 +30,14 @@ export default function Project() {
             />
             <figcaption>{project.title}</figcaption>
           </figure>
+          <div className="linkBack">
+            <NavLink
+              to="/"
+              end
+            >
+              Retour au Portfolio
+            </NavLink>
+          </div>
         </header>
         <Details project={project}></Details>
       </div>

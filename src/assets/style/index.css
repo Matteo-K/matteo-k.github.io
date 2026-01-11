@@ -75,6 +75,28 @@ body {
   font-weight: bold;
 }
 
+.linkBack {
+  margin: 25px;
+  display: flex;
+  justify-content: end;
+}
+.linkBack a {
+  padding: 10px;
+  background-color: var(--color-background-third);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  border-radius: 10px;
+}
+.linkBack a:hover {
+  color: var(--color-white);
+}
+
+.tag {
+  padding: 10px 20px;
+  background-color: var(--color-background-secondary);
+  border-radius: 50px;
+}
+
 .border-hover {
   position: relative;
   cursor: pointer;
@@ -462,6 +484,11 @@ header .nav-link.active {
 #home-menu h2 {
   margin-block: 5px;
 }
+#home-menu .tags {
+  display: flex;
+  margin-inline: 10px;
+  gap: 10px;
+}
 #home-menu > div:nth-child(2) {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -475,12 +502,33 @@ header .nav-link.active {
   grid-area: 1/1/4/2;
 }
 #home-menu .description a {
+  color: var(--color-accent);
+}
+#home-menu .description h3 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin-block: 1rem;
+}
+#home-menu .description .subtitle {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-white);
+}
+#home-menu .description .citation {
+  font-style: italic;
+  margin-bottom: 2rem;
+  color: var(--color-text-secondary);
+}
+#home-menu .description .nav-link {
   background-color: var(--color-white);
   color: var(--color-black);
   padding: 5px 10px;
   border-radius: 5px;
   width: -moz-fit-content;
   width: fit-content;
+}
+#home-menu .description .nav-link:hover {
+  background-color: var(--color-border-100);
 }
 #home-menu .collaborateur {
   grid-area: 1/2/2/3;
@@ -511,6 +559,7 @@ header .nav-link.active {
 }
 #home-menu .gallerie {
   grid-area: 1/3/3/4;
+  background: url("../image/e-declic_nature.jpg") center/cover no-repeat;
 }
 #home-menu .trophies {
   grid-area: 3/3/4/4;
@@ -545,6 +594,9 @@ header .nav-link.active {
 /* About me */
 #aboutme header figure {
   justify-content: start;
+}
+#aboutme header a {
+  color: var(--color-accent);
 }
 #aboutme header img {
   border-radius: 50%;

@@ -12,6 +12,14 @@ function About(props) {
   return (
     <Page>
       <div id="aboutme">
+        <div className="linkBack">
+          <NavLink
+            to="/"
+            end
+          >
+            Retour au Portfolio
+          </NavLink>
+        </div>
         <header>
           <figure>
             <img src="/image/matteo_kervadec.png" alt="Mattéo Kervadec" title="Mattéo Kervadec"/>

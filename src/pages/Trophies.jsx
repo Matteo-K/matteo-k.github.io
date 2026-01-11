@@ -1,7 +1,8 @@
 import { Page } from "../components/_partials";
 import { useData } from '../hooks/useData';
 import { DataStatut } from '../enums/DataStatut';
-import { Trophies as ComposantTrophies} from '../components/_partials/Menu'
+import { Trophies as ComposantTrophies} from '../components/_partials/Menu';
+import { NavLink } from "react-router-dom";
 
 export default function Trophies() {
   const { isLoading, error, getProjects } = useData();
@@ -15,6 +16,14 @@ export default function Trophies() {
 
   return (
     <Page>
+      <div className="linkBack">
+        <NavLink
+          to="/"
+          end
+        >
+          Retour au Portfolio
+        </NavLink>
+      </div>
       <header>
         <h1>Trophées</h1>
         <ComposantTrophies type="summary"></ComposantTrophies>
