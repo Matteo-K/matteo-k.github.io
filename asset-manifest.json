@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.045932cb.css",
+    "main.css": "/static/css/main.539b9797.css",
     "main.js": "/static/js/main.017bcf3f.js",
     "static/js/453.bf7ba022.chunk.js": "/static/js/453.bf7ba022.chunk.js",
     "static/media/e-declic_nature.jpg": "/static/media/e-declic_nature.0315542a1c2fa40e8712.jpg",
     "static/media/Inter-VariableFont_opsz,wght.ttf": "/static/media/Inter-VariableFont_opsz,wght.e05c5f3d1fa6a3893d84.ttf",
     "static/media/Montserrat-VariableFont_wght.ttf": "/static/media/Montserrat-VariableFont_wght.0ba081b76521874cf46c.ttf",
     "index.html": "/index.html",
-    "main.045932cb.css.map": "/static/css/main.045932cb.css.map",
+    "main.539b9797.css.map": "/static/css/main.539b9797.css.map",
     "main.017bcf3f.js.map": "/static/js/main.017bcf3f.js.map",
     "453.bf7ba022.chunk.js.map": "/static/js/453.bf7ba022.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.045932cb.css",
+    "static/css/main.539b9797.css",
     "static/js/main.017bcf3f.js"
   ]
 }
