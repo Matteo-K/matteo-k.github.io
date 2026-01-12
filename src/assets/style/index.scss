@@ -98,6 +98,12 @@ body {
   }
 }
 
+.icon-bg-white {
+  background-color: var(--color-white);
+  border-radius: 10px;
+  padding: 5px;
+}
+
 .tag {
   padding: 10px 20px;
   background-color: var(--color-background-secondary);
@@ -534,7 +540,7 @@ $animation-time: 0.4s;
   background-color: var(--color-background-secondary);
   border-radius: 20px;
   padding: 25px;
-  min-width: 500px;
+  min-width: 475px;
 
   &.aboutme {
     min-width: auto;
@@ -559,7 +565,22 @@ $animation-time: 0.4s;
     grid-column-gap: 25px;
     grid-row-gap: 25px;
     padding: 10px;
-    overflow: scroll;
+    overflow-x: auto;
+    scrollbar-color: var(--color-text-secondary) var(--color-background-primary);
+
+    &::-webkit-scrollbar-track {
+      background: var(--color-background-primary);
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--color-text-secondary);
+      border-radius: 4px;
+      border: 2px solid var(--color-background-primary);
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: var(--color-text-secondary);
+    }
   }
 
   .description {
@@ -1197,6 +1218,23 @@ $animation-time: 0.4s;
       margin: 0;
     }
 
+    > * {
+      flex: 1;
+    }
+
+    .goal {
+      display: flex;
+      flex-direction: column;
+
+      h2 {
+        margin-block: 5px;
+      }
+
+      .content {
+        flex: 1;
+      }
+    }
+
     .skill {
       display: flex;
       flex-direction: column;
@@ -1249,8 +1287,24 @@ $animation-time: 0.4s;
       justify-content: start;
       gap: 20px;
       padding: 20px;
-      overflow-x: scroll;
+      overflow-x: auto;
+      scrollbar-color: var(--color-text-secondary) var(--color-background-primary);
+
+      &::-webkit-scrollbar-track {
+        background: var(--color-background-primary);
+        border-radius: 4px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: var(--color-text-secondary);
+        border-radius: 4px;
+        border: 2px solid var(--color-background-primary);
+      }
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: var(--color-text-secondary);
+      }
     }
+
   }
 
 #login {
@@ -1310,5 +1364,23 @@ $animation-time: 0.4s;
       background-color: var(--color-background-third);
       border-radius: 10px;
     }
+  }
+}
+
+.company-details {
+  figure {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin: 0;
+
+    a {
+      color: var(--color-accent);
+      font-size: 1.5rem;
+    }
+  }
+
+  img {
+    width: 40px;
   }
 }

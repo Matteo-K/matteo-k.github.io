@@ -91,6 +91,12 @@ body {
   color: var(--color-white);
 }
 
+.icon-bg-white {
+  background-color: var(--color-white);
+  border-radius: 10px;
+  padding: 5px;
+}
+
 .tag {
   padding: 10px 20px;
   background-color: var(--color-background-secondary);
@@ -475,7 +481,7 @@ header .nav-link.active {
   background-color: var(--color-background-secondary);
   border-radius: 20px;
   padding: 25px;
-  min-width: 500px;
+  min-width: 475px;
 }
 .block.aboutme {
   min-width: auto;
@@ -496,7 +502,20 @@ header .nav-link.active {
   grid-column-gap: 25px;
   grid-row-gap: 25px;
   padding: 10px;
-  overflow: scroll;
+  overflow-x: auto;
+  scrollbar-color: var(--color-text-secondary) var(--color-background-primary);
+}
+#home-menu > div:nth-child(2)::-webkit-scrollbar-track {
+  background: var(--color-background-primary);
+  border-radius: 4px;
+}
+#home-menu > div:nth-child(2)::-webkit-scrollbar-thumb {
+  background-color: var(--color-text-secondary);
+  border-radius: 4px;
+  border: 2px solid var(--color-background-primary);
+}
+#home-menu > div:nth-child(2)::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-text-secondary);
 }
 #home-menu .description {
   grid-area: 1/1/4/2;
@@ -1012,6 +1031,19 @@ header .nav-link.active {
 .detailsProject .info section {
   margin: 0;
 }
+.detailsProject .info > * {
+  flex: 1;
+}
+.detailsProject .info .goal {
+  display: flex;
+  flex-direction: column;
+}
+.detailsProject .info .goal h2 {
+  margin-block: 5px;
+}
+.detailsProject .info .goal .content {
+  flex: 1;
+}
 .detailsProject .info .skill {
   display: flex;
   flex-direction: column;
@@ -1052,7 +1084,20 @@ header .nav-link.active {
   justify-content: start;
   gap: 20px;
   padding: 20px;
-  overflow-x: scroll;
+  overflow-x: auto;
+  scrollbar-color: var(--color-text-secondary) var(--color-background-primary);
+}
+.detailsTrophy .content::-webkit-scrollbar-track {
+  background: var(--color-background-primary);
+  border-radius: 4px;
+}
+.detailsTrophy .content::-webkit-scrollbar-thumb {
+  background-color: var(--color-text-secondary);
+  border-radius: 4px;
+  border: 2px solid var(--color-background-primary);
+}
+.detailsTrophy .content::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-text-secondary);
 }
 
 #login {
@@ -1103,4 +1148,18 @@ header .nav-link.active {
   margin-block: 20px;
   background-color: var(--color-background-third);
   border-radius: 10px;
+}
+
+.company-details figure {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 0;
+}
+.company-details figure a {
+  color: var(--color-accent);
+  font-size: 1.5rem;
+}
+.company-details img {
+  width: 40px;
 }/*# sourceMappingURL=index.css.map */

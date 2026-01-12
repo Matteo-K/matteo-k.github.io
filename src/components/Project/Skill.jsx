@@ -17,8 +17,9 @@ export default function Skill(props) {
           .map((skill) => (
           <figure>
             <img src={"/image/uploads/images/technology/" + skill.technologie.illustrationName} 
-              alt=""
-              title=""
+              alt={skill.technologie.name}
+              title={skill.technologie.name}
+              className="icon-bg-white"
             />
             <figcaption>
               <div>{skill.technologie.name}</div>

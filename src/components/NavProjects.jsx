@@ -11,6 +11,8 @@ export default function NavProjects(props) {
   const { isLoading, error, getProjects } = useData();
   const [ swipperRef, setSwipperRef ] = useState(null);
 
+  if (isLoading) return <div>🔄 Chargement...</div>;
+  if (error) return <div>❌ Erreur: {error}</div>;
   const projects = !isLoading && !error ? getProjects({
     where: { statut: DataStatut.ACTIF },
     order: { priority: 1},

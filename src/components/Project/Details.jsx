@@ -3,6 +3,7 @@ import Trophies from './Trophies';
 import { Trophies as CountTrophies } from "../_partials/Menu"
 // import Collaborators from './Collaborators';
 import Skill from './Skill';
+import Goal from './Goal';
 
 export default function Details(props) {
   const project = props.project;
@@ -88,6 +89,7 @@ export default function Details(props) {
       <section className='info'>
         <CountTrophies project={project}></CountTrophies>
         <Skill project={project}></Skill>
+        <Goal project={project}></Goal>
       </section>
 
       {/* <Collaborators project={project}></Collaborators> */}
