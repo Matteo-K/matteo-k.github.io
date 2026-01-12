@@ -4,7 +4,7 @@ import parse from 'html-react-parser';
 
 export default function CompanyDetails({ company, type }) {
 
-  const img_path = type == ProjectObjective.COMPANY
+  const img_path = type === ProjectObjective.COMPANY
     ? "society"
     : "school"
   ;

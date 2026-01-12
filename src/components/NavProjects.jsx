@@ -5,7 +5,6 @@ import { A11y } from 'swiper/modules';
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 import { useState } from 'react';
-import CardLoader from './CardLoader';
 
 export default function NavProjects(props) {
   const { isLoading, error, getProjects } = useData();
