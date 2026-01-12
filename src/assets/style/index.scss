@@ -1375,9 +1375,12 @@ $animation-time: 0.4s;
     margin: 0;
 
     a {
-      color: var(--color-accent);
       font-size: 1.5rem;
     }
+  }
+
+  a {
+    color: var(--color-accent);
   }
 
   img {

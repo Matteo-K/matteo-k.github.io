@@ -1157,8 +1157,10 @@ header .nav-link.active {
   margin: 0;
 }
 .company-details figure a {
-  color: var(--color-accent);
   font-size: 1.5rem;
+}
+.company-details a {
+  color: var(--color-accent);
 }
 .company-details img {
   width: 40px;
