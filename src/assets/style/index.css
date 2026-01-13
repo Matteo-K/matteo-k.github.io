@@ -31,24 +31,26 @@ body {
   --color-white-30: oklch(from var(--color-white) l c h / 0.3);
   --color-white-10: oklch(from var(--color-white) l c h / 0.1);
   --color-black: #000000;
-  --color-ps-blue: #0070cc;
-  --color-ps-dark-blue: #003087;
   --color-background-primary: #1f1f1f;
   --color-background-secondary: #2d2d2d;
   --color-background-third: #3b3b3b;
   --color-background-card: #1a1a1a;
   --color-text-primary: #ffffff;
   --color-text-secondary: #b3b3b3;
-  --color-accent: #0070cc;
   --color-hover: #0082eb;
   --color-border-0: oklch(from #B18FB5 l c h / 0.38);
   --color-border-100: #CAA7D1;
   --color-success: #00d563;
   --color-error: #ff3333;
-  --color-gradient-start: #0070cc;
-  --color-gradient-end: #003087;
   color: var(--color-text-primary);
   background-color: var(--color-background-primary);
+}
+
+[target=_blank], .company-details a {
+  color: var(--color-text-primary);
+}
+[target=_blank]:hover, .company-details a:hover {
+  color: var(--color-hover);
 }
 
 /* ## Constantes */
@@ -520,13 +522,11 @@ header .nav-link.active {
 #home-menu .description {
   grid-area: 1/1/4/2;
 }
-#home-menu .description a {
-  color: var(--color-accent);
-}
 #home-menu .description h3 {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   line-height: 1.2;
-  margin-block: 1rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
 }
 #home-menu .description .subtitle {
   font-size: 1.25rem;
@@ -613,9 +613,6 @@ header .nav-link.active {
 /* About me */
 #aboutme header figure {
   justify-content: start;
-}
-#aboutme header a {
-  color: var(--color-accent);
 }
 #aboutme header img {
   border-radius: 50%;
@@ -1158,9 +1155,6 @@ header .nav-link.active {
 }
 .company-details figure a {
   font-size: 1.5rem;
-}
-.company-details a {
-  color: var(--color-accent);
 }
 .company-details img {
   width: 40px;

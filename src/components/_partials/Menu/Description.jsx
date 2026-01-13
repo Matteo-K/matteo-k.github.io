@@ -7,7 +7,7 @@ export default function Description() {
         <div className="title">
           <h2>Bienvenue</h2>
           <h3>
-            Salut, je suis <strong>Mattéo KERVADEC</strong>
+            Je suis <strong>Mattéo KERVADEC</strong>
           </h3>
         </div>
 
@@ -25,7 +25,7 @@ export default function Description() {
         <NavLink
           to="/aboutme/presentation"
           end
-          className="nav-link"
+          className="button-external-link border-hover"
         >
           En savoir plus sur moi
         </NavLink>
